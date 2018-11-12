@@ -1,0 +1,1 @@
+export const LAYOUT_SWAP = 'LAYOUT_SWAP';
