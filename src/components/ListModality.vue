@@ -54,15 +54,7 @@ export default {
     };
   },
   computed: {
-    upForm() {
-      return {
-        name: this.$props.name,
-        code: this.$props.code,
-        description: this.$props.description,
-        id: this.$props.id,
-        isActive: this.$props.isActive
-      };
-    }
+ 
   },
   methods: {
     onSubmit(data) {
