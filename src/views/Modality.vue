@@ -2,17 +2,18 @@
      <div class="row">
       <div class="col-md-12">
         <div class="add-button">
-        <b-button  size="sm" variant="primary" v-b-modal.modalPrevent>Add</b-button>
+        <b-button  size="sm" variant="primary" @click="addModel()">Add</b-button>
       </div>
         
-        <table class="table table-bordered">
+       <List-Modality :modelityLists ="modelityLists" :getActive="getActive" :EditModel="EditModel"> </List-Modality>
+        <!-- <table class="table table-bordered">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Code </th>
-              <th>Description</th>
-              <th> Active </th>
-              <th>Action</th>
+            <tr v-for="(header, index) in headerInfo" v-bind:key="index">
+              <th>{{header.name}}</th>
+              <th>{{header.code}} </th>
+              <th>{{header.description}}</th>
+              <th> {{header.active}} </th>
+              <th>{{header.action}}</th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +31,7 @@
                   <td>  <b-button  size="sm" variant="primary" @click="EditModel(modelity)">Modify</b-button> </td>
               </tr>
             </tbody>
-        </table>
+        </table> -->
        
       </div>
            <Edit-model
@@ -57,11 +58,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import EditModel from "../components/EditModel";
+import ListModality from "../components/ListModality";
+
 
 export default {
   name: "Modality",
   components: {
-    "Edit-model": EditModel
+    "Edit-model": EditModel,
+    "List-Modality":ListModality
   },
   data() {
     return {
@@ -77,9 +81,17 @@ export default {
       names: [],
       modelity: [],
       modelData: "",
-      editInfo: []
+      editInfo: [],
+      headerInfo:[{
+        "name":"Name",
+        "code" : "Code",
+        "description" : "Description",
+        "active" : "Active",
+        "action" : "Action"
+      }]
     };
   },
+
   updated() {
     console.log("modelityLists", this.modelityLists);
   },
@@ -138,6 +150,9 @@ export default {
         isActive: evt.is_active
       };
       this.editModal = true;
+    },
+    addModel(){
+       this.editModal = true;
     },
 
     getActive(data) {
